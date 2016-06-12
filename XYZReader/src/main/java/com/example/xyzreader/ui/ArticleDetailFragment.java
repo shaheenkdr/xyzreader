@@ -160,7 +160,8 @@ public class ArticleDetailFragment extends Fragment implements
         mDrawInsetsFrameLayout.setInsetBackground(mStatusBarColorDrawable);
     }
 
-    static float progress(float v, float min, float max) {
+    static float progress(float v, float min, float max)
+    {
         return constrain((v - min) / (max - min), 0, 1);
     }
 
