@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -49,6 +51,11 @@ public class ArticleListActivity extends AppCompatActivity implements
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        mToolbar.setTitle("");
+        TextView toolbarText = (TextView)findViewById(R.id.titleText);
+        Typeface face= Typeface.createFromAsset(getAssets(), "Roboto-Bold.ttf");
+        toolbarText.setTypeface(face);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         getLoaderManager().initLoader(0, null, this);
@@ -143,7 +150,15 @@ public class ArticleListActivity extends AppCompatActivity implements
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             mCursor.moveToPosition(position);
+            Typeface face= Typeface.createFromAsset(getAssets(), "Roboto-Bold.ttf");
+            holder.titleView.setTypeface(face);
+            holder.titleView.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.primary_text));
             holder.titleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
+
+
+            Typeface face2= Typeface.createFromAsset(getAssets(), "Roboto-Regular.ttf");
+            holder.subtitleView.setTypeface(face2);
+            holder.subtitleView.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.secondary_text));
             holder.subtitleView.setText(
                     DateUtils.getRelativeTimeSpanString(
                             mCursor.getLong(ArticleLoader.Query.PUBLISHED_DATE),
