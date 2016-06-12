@@ -150,7 +150,7 @@ public class ArticleListActivity extends AppCompatActivity implements
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             mCursor.moveToPosition(position);
-            Typeface face= Typeface.createFromAsset(getAssets(), "Roboto-Bold.ttf");
+            Typeface face= Typeface.createFromAsset(getAssets(), "Roboto-Medium.ttf");
             holder.titleView.setTypeface(face);
             holder.titleView.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.primary_text));
             holder.titleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
